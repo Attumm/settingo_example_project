@@ -11,12 +11,15 @@ func main() {
 
 	SETTINGS.SetInt("answer_to_the_universe", 42, "explain why 42 is the answer to the universe")
 
+	SETTINGS.SetBool("hamlet", true, "to be or not to be?")
+
 	SETTINGS.Parse()
 
 	foobar := SETTINGS.Get("FOOBAR")
 
 	fmt.Println("foobar =", foobar)
 	fmt.Println("answer to the universe =", SETTINGS.GetInt("answer_to_the_universe"))
+	fmt.Println("to be or not to be? =", SETTINGS.GetBool("hamlet"))
 }
 
 //SETTINGS.SetBool("starred", "y", "values (y, yes, true, t, '') have the property of truthiness")
