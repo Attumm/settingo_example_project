@@ -7,13 +7,21 @@ import (
 )
 
 func main() {
-
+	// Setting strings
 	settingo.Set("FOOBAR", "default_value_for_foo_bar", "explain why something is foobar")
 
+	// Setting integers
 	settingo.SetInt("answer_to_the_universe", 42, "explain why 42 is the answer to the universe")
 
+	// Setting Booleans
 	settingo.SetBool("hamlet", true, "to be or not to be?")
 
+	// Setting Maps
+	defaultMap := make(map[string][]string)
+	defaultMap["foo"] = []string{"bar"}
+	settingo.SetMap("FOO", defaultMap, "help text")
+
+	// Run parse after the setting set.
 	settingo.Parse()
 
 	foobar := settingo.Get("FOOBAR")
@@ -21,6 +29,8 @@ func main() {
 	fmt.Println("foobar =", foobar)
 	fmt.Println("answer to the universe =", settingo.GetInt("answer_to_the_universe"))
 	fmt.Println("to be or not to be? =", settingo.GetBool("hamlet"))
+
+	fmt.Println("the result of the map", settingo.GetMap("FOO"))
 }
 
 //settingo.SetBool("starred", "y", "values (y, yes, true, t, '') have the property of truthiness")

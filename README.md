@@ -5,39 +5,38 @@ Settings parses command line and environment variables on one line.
 And makes it available throughout the code base. Making using settings in your project as boring and unimportant as it should be.
 Settings vars is as simple as:
 ```go
- SETTINGS.Set("FOO", "default value", "help text")
+ settingo.Set("FOO", "default value", "help text")
 ```
 Getting vars out has the same level of complexity as setting the value.
 ```go
- SETTINGS.Get("FOO")
+ settingo.Get("FOO")
 ```
+
 
 ## Features
 - Simple to use
 - supports command line and environment variables 
-- Support for types: str, int, ~~bool~~, ~~map~~
-- Singleton, makes it easy to use in program anywhere in the codebase
+- Support for types: str, int, bool, map
+- Singleton, makes it easy to use in program anywhere in the code-base
 - Supports help text with --help on the binary
-- Ease of use in any enviroment examples: linux, docker, k8
+- Ease of use in any environment examples: linux, docker, k8
 
 
 ## Example
-example of how to use. More can be found in the [example_project](https://github.com/Attumm/settingo_example)
-
-```
+example of how to use. More can be found in the [example_project](https://github.com/Attumm/settingo_example_project/blob/main/main.go)
 ```go
 package main
 
 import (
         "fmt"
-        . "github.com/Attumm/settingo/settingo"
+        "github.com/Attumm/settingo/settingo"
 )
 
 func main() {
-        SETTINGS.Set("FOO", "default value", "handy help text)
+        settingo.Set("FOO", "default value", "handy help text")
         
-        SETTINGS.Parse()
-        fmt.Println("foobar =",  SETTINGS.Get("FOOBAR"))
+        settingo.Parse()
+        fmt.Println("foobar =",  settingo.Get("FOOBAR"))
 }
 ```
 The above go will produce binary that can be used as follows.
@@ -56,32 +55,50 @@ $ ./example
 foo = default value
 ```
 
-Running the binary with comamnd line input
+Running the binary with command line input
 ```sh
 $ ./example -FOO bar
 foo = bar
 ```
-Running the binary with environment varaibles
+Running the binary with environment variable
 ```sh
 $ FOO=ok;./example
 foo = ok
 ```
 
-
-
 ## Order of preference
 variables are set with preference
-variables on the command line will have highest prefference.
-This because while testing you might want to override enviroment 
+variables on the command line will have highest preference.
+This because while testing you might want to override environment
 The priority order is as follows
 1. Command line input
 2. Environment variables 
 3. Default values
 
+## Types
+Settingo supports different types.
+```go
+// string
+settingo.Set("FOO", "default", "help text")
+settingo.Get("FOO")
+
+// integer
+settingo.SetInt("FOO", 42, "help text")
+settingo.GetInt("FOO")
+
+// boolean
+settingo.SetBool("FOO", true, "help text")
+settingo.GetBool("FOO")
+
+// map
+defaultMap := make(map[string][]string)
+defaultMap["foo"] = []string{"bar"}
+settingo.SetMap("FOO", defaultMap, "help text")
+settingo.GetMap("FOO")
+```
+
 ## Installation
-Use the following line in your imports        // go mod init
-        // go get
-        // go build
+Use the following line in your imports
 
 
 ```go
@@ -95,8 +112,8 @@ go build
 ```
 or use the [example_project](https://github.com/Attumm/example_settingo) as starting point.
 
+
 ## License
 
 MIT
-
 
