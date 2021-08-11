@@ -2,27 +2,28 @@ package main
 
 import (
 	"fmt"
-	. "github.com/Attumm/settingo/settingo"
+
+	"github.com/Attumm/settingo/settingo"
 )
 
 func main() {
 
-	SETTINGS.Set("FOOBAR", "default_value_for_foo_bar", "explain why something is foobar")
+	settingo.Set("FOOBAR", "default_value_for_foo_bar", "explain why something is foobar")
 
-	SETTINGS.SetInt("answer_to_the_universe", 42, "explain why 42 is the answer to the universe")
+	settingo.SetInt("answer_to_the_universe", 42, "explain why 42 is the answer to the universe")
 
-	SETTINGS.SetBool("hamlet", true, "to be or not to be?")
+	settingo.SetBool("hamlet", true, "to be or not to be?")
 
-	SETTINGS.Parse()
+	settingo.Parse()
 
-	foobar := SETTINGS.Get("FOOBAR")
+	foobar := settingo.Get("FOOBAR")
 
 	fmt.Println("foobar =", foobar)
-	fmt.Println("answer to the universe =", SETTINGS.GetInt("answer_to_the_universe"))
-	fmt.Println("to be or not to be? =", SETTINGS.GetBool("hamlet"))
+	fmt.Println("answer to the universe =", settingo.GetInt("answer_to_the_universe"))
+	fmt.Println("to be or not to be? =", settingo.GetBool("hamlet"))
 }
 
-//SETTINGS.SetBool("starred", "y", "values (y, yes, true, t, '') have the property of truthiness")
+//settingo.SetBool("starred", "y", "values (y, yes, true, t, '') have the property of truthiness")
 
 // run parse to parse input from:
 // priority order
@@ -31,7 +32,7 @@ func main() {
 // 3. default values
 
 // to access the values they are stored in SettingS
-// SETTINGS is a singleton and is accessable from each file where the import is done.
+// settingo is a singleton and is accessable from each file where the import is done.
 // according to best practices it's better to take the settings vars out in the main.
 
 // yup that's it
